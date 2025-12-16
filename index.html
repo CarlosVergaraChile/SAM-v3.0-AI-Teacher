@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM v3.0 - Sistema Asistente de Maestros</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .tab-btn:hover { transform: translateY(-2px); }
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            min-height: 500px;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover { background: #764ba2; }
+        .result {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .result.show { display: block; }
+        .score {
+            font-size: 3em;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .feedback { color: #333; line-height: 1.6; }
+        .history {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .history-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 SAM v3.0</h1>
+            <p>Sistema Asistente de Maestros - Empoderando Docentes con IA</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('generador')">🎯 Generador</button>
+            <button class="tab-btn" onclick="switchTab('evaluador')">📋 Evaluador</button>
+            <button class="tab-btn" onclick="switchTab('admin')">⚙️ Admin</button>
+        </div>
+
+        <div class="content">
+            <!-- TAB 1: GENERADOR -->
+            <div id="generador" class="tab-content active">
+                <h2>Generador de Materiales Educativos</h2>
+                <form onsubmit="generateMaterial(event)">
+                    <div class="form-group">
+                        <label>Nivel Educativo</label>
+                        <select id="level" required>
+                            <option value="">Selecciona nivel...</option>
+                            <option value="parvularia">Parvularia</option>
+                            <option value="basica1-3">Básica 1-3</option>
+                            <option value="basica4-6">Básica 4-6</option>
+                            <option value="media">Media</option>
+                            <option value="superior">Superior</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Asignatura</label>
+                        <input type="text" id="subject" placeholder="Ej: Matemática, Lenguaje" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Material</label>
+                        <select id="material" required>
+                            <option value="">Selecciona tipo...</option>
+                            <option value="prueba">Prueba</option>
+                            <option value="planificacion">Planificación</option>
+                            <option value="juego">Juego</option>
+                            <option value="guia">Guía</option>
+                            <option value="rubrica">Rúbrica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Características Especiales</label>
+                        <label><input type="checkbox" name="special" value="tea"> Estudiantes con TEA</label><br>
+                        <label><input type="checkbox" name="special" value="tdah"> TDAH</label><br>
+                        <label><input type="checkbox" name="special" value="desmotivado"> Curso desmotivado</label><br>
+                        <label><input type="checkbox" name="special" value="inquieto"> Curso inquieto</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Detalles Adicionales</label>
+                        <textarea id="details" placeholder="Ej: Tema específico, objetivos de aprendizaje, etc."></textarea>
+                    </div>
+                    <button type="submit" class="btn">🚀 Generar con IA</button>
+                </form>
+                <div id="result1" class="result">
+                    <div id="generatedContent"></div>
+                </div>
+            </div>
+
+            <!-- TAB 2: EVALUADOR -->
+            <div id="evaluador" class="tab-content">
+                <h2>Evaluador de Pruebas Manuscritas</h2>
+                <form onsubmit="evaluateTest(event)">
+                    <div class="form-group">
+                        <label>Captura o carga foto de la prueba</label>
+                        <input type="file" id="testImage" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Rúbrica de Evaluación</label>
+                        <textarea id="rubric" placeholder="Ej: Ortografía 20%, Claridad 30%, Contenido 50%" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Puntuación Máxima</label>
+                        <input type="number" id="maxScore" value="100" required>
+                    </div>
+                    <button type="submit" class="btn">📊 Evaluar Prueba</button>
+                </form>
+                <div id="result2" class="result">
+                    <div class="score" id="score"></div>
+                    <div id="evaluationResult"></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: ADMINISTRACIÓN -->
+            <div id="admin" class="tab-content">
+                <h2>Panel de Administración</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: #667eea; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">5</div>
+                        <div>Generaciones Disponibles</div>
+                    </div>
+                    <div style="background: #764ba2; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">Plan Gratuito</div>
+                        <div>Usuario activo</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Historial</h3>
+                <div id="history" class="history"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simular almacenamiento local
+        let generatedMaterials = JSON.parse(localStorage.getItem('materials') || '[]');
+        let credits = 5;
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function generateMaterial(e) {
+            e.preventDefault();
+            if (credits <= 0) {
+                alert('Sin créditos disponibles');
+                return;
+            }
+            
+            const level = document.getElementById('level').value;
+            const subject = document.getElementById('subject').value;
+            const material = document.getElementById('material').value;
+            const details = document.getElementById('details').value;
+            
+            const mockMaterial = `
+                <h3>${material.toUpperCase()} de ${subject}</h3>
+                <p><strong>Nivel:</strong> ${level}</p>
+                <p><strong>Contenido:</strong> Material generado automáticamente por SAM IA para ${level} en ${subject}.</p>
+                <p>${details ? 'Consideraciones: ' + details : ''}</p>
+                <p>✅ Material listo para usar. Puede copiar y adaptar según necesidad.</p>
+            `;
+            
+            document.getElementById('generatedContent').innerHTML = mockMaterial;
+            document.getElementById('result1').classList.add('show');
+            generatedMaterials.push({date: new Date().toLocaleString(), content: mockMaterial});
+            localStorage.setItem('materials', JSON.stringify(generatedMaterials));
+            credits--;
+            updateHistory();
+        }
+
+        function evaluateTest(e) {
+            e.preventDefault();
+            const rubric = document.getElementById('rubric').value;
+            const maxScore = parseInt(document.getElementById('maxScore').value);
+            
+            const mockScore = Math.floor(Math.random() * (maxScore - 60) + 60);
+            const mockFeedback = `
+                <h3>Evaluación Completa</h3>
+                <p><strong>Rúbrica Aplicada:</strong> ${rubric}</p>
+                <p><strong>Fortalezas:</strong> Buena estructura, excelente presentación</p>
+                <p><strong>Áreas de Mejora:</strong> Profundizar en conceptos, revisar ortografía</p>
+                <p><strong>Feedback:</strong> Excelente trabajo. Continúa así y verás mejoras significativas.</p>
+                <button class="btn" onclick="navigator.clipboard.writeText('Evaluación completada: ${mockScore}/${maxScore}')">📋 Copiar Feedback</button>
+            `;
+            
+            document.getElementById('score').textContent = mockScore + '/' + maxScore;
+            document.getElementById('evaluationResult').innerHTML = mockFeedback;
+            document.getElementById('result2').classList.add('show');
+        }
+
+        function updateHistory() {
+            const historyDiv = document.getElementById('history');
+            historyDiv.innerHTML = generatedMaterials.map((m, i) => `
+                <div class="history-item">
+                    <strong>Material ${i+1}</strong><br>
+                    <small>${m.date}</small>
+                </div>
+            `).join('');
+        }
+
+        updateHistory();
+    </script>
+</body>
+</html>
