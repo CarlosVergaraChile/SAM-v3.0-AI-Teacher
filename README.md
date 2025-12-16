@@ -175,3 +175,22 @@ SAM-v3.0-AI-Teacher/
 ---
 
 **©2025 SAM - Empoderando Docentes con IA**
+
+
+## 💳 Integración con Payment Gateway Standard
+
+Esta aplicación utiliza el estándar de pasarela de pagos unificado para todos los proyectos de CarlosVergaraChile.
+
+### Documentación
+
+Ver [payment-gateway-standard](https://github.com/CarlosVergaraChile/payment-gateway-standard) para información detallada sobre:
+- Configuración de proveedores de pago
+- Análisis de costos
+- Integración en otros proyectos
+
+### Proveedores Soportados
+
+- **Flow**: Principal para transacciones en CLP (recomendado para Chile)
+- **Global66**: Pagos internacionales y múltiples monedas
+- **PayPal**: Opción alternativa para alcance global
+- **Mercado Pago**: Cobertura regional en América Latina
