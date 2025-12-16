@@ -217,4 +217,45 @@ Ver [seasonal-market-standard](https://github.com/CarlosVergaraChile/seasonal-ma
 
 ---
 
+## 🌐 SAM v3.0 en el Ecosistema Integrado de CarlosVergaraChile
+
+SAM v3.0 actúa como la **plataforma educativa central** dentro de un ecosistema más amplio de proyectos integrados.
+
+### Flujos de Integracion principales:
+
+**1. Contenidos Educativos:**
+- Usa plantillas de [course-module-standard](https://github.com/CarlosVergaraChile/course-module-standard)
+- Estructura modular de 8-12 horas por módulo
+- Rúbricas estandarizadas para evaluaciones
+
+**2. Monetizacion:**
+- Integrado con [payment-gateway-standard](https://github.com/CarlosVergaraChile/payment-gateway-standard)
+- Soporta: Flow, PayPal, Mercado Pago, Global66
+- Sistema de créditos y planes por suscripción
+
+**3. Analisis Temporal:**
+- Usa [seasonal-market-standard](https://github.com/CarlosVergaraChile/seasonal-market-standard)
+- Detecta demanda docente por período escolar
+- Pricing dinámico según temporada
+
+**4. Marketing Digital:**
+- Distribuido via [marketing-digital-standard](https://github.com/CarlosVergaraChile/marketing-digital-standard)
+- SEO optimizado
+- Canales de distribución integrados
+
+**5. Orquestacion Inteligente:**
+- Coordinado por [maquina-orquestadora-gl-strategic](https://github.com/CarlosVergaraChile/maquina-orquestadora-gl-strategic)
+- Control adaptativo de modelos IA
+- Aprendizaje en tiempo real
+
+### Arquitectura General:
+
+Ver [deploy-guide/ECOSYSTEM_ARCHITECTURE.md](https://github.com/CarlosVergaraChile/deploy-guide/blob/main/ECOSYSTEM_ARCHITECTURE.md) para visión completa del ecosistema de 12 repositorios integrados.
+
+### Ejemplos de Implementacion:
+
+- **Proyecto-Sence-2026**: Cursos especializados usando estructura CMS
+- **cosas-i-doodle-shop**: E-commerce usando payment-gateway
+- **GL Strategic MVP**: Consultoría coordinada por orquestadora
+
 **SAM v3.0** integra curso-module-standard, payment-gateway-standard y seasonal-market-standard para máxima reutilización.
