@@ -194,3 +194,27 @@ Ver [payment-gateway-standard](https://github.com/CarlosVergaraChile/payment-gat
 - **Global66**: Pagos internacionales y múltiples monedas
 - **PayPal**: Opción alternativa para alcance global
 - **Mercado Pago**: Cobertura regional en América Latina
+
+
+## 📅 Integración Temporal - Seasonal & Market Analysis
+
+SAM v3.0 debe considerar contexto temporal para personalización avanzada.
+
+Ver [seasonal-market-standard](https://github.com/CarlosVergaraChile/seasonal-market-standard) para:
+
+- **Calendario Escolar Chile**: Inicio/mitad/final de semestre
+- **Demanda Docente por Período**: Qué necesitan en marzo vs. octubre
+- **Productos Sugeridos**: Evaluaciones iniciales, refuerzo, evaluaciones finales
+- **Pricing Dinámico**: Precios según temporada de inscripción
+
+## 🔄 Código RED: Reutilizable, Escalable, Documentado
+
+**Reutilizable**: Generador parametrizado + Evaluador agnóstico + Integraciones varias
+
+**Escalable**: Arquitectura modular, hosting flexible, soporte para 100s usuarios
+
+**Documentado**: README completo, .env.example, stack technology, roadmap
+
+---
+
+**SAM v3.0** integra curso-module-standard, payment-gateway-standard y seasonal-market-standard para máxima reutilización.
