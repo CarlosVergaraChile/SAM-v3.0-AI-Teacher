@@ -1,0 +1,234 @@
+{
+  "name": "Market Research Intelligence - Corporate Explorer",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "market-research",
+        "responseMode": "onReceived"
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ],
+      "webhookId": "{{$secrets.MARKET_RESEARCH_WEBHOOK_ID}}"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/customsearch/v1",
+        "queryParameters": [
+          {
+            "name": "q",
+            "value": "={{$node[\"webhook-trigger\"].json.query}}"
+          },
+          {
+            "name": "key",
+            "value": "={{$secrets.GOOGLE_SEARCH_API_KEY}}"
+          },
+          {
+            "name": "cx",
+            "value": "={{$secrets.GOOGLE_SEARCH_ENGINE_ID}}"
+          },
+          {
+            "name": "num",
+            "value": "10"
+          },
+          {
+            "name": "gl",
+            "value": "cl"
+          }
+        ],
+        "options": {}
+      },
+      "id": "google-search-api",
+      "name": "Google Custom Search API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar respuesta de Google Search API\nconst results = $input.all()[0].json.items || [];\n\nconst processedResults = results.map((item, index) => ({\n  rank: index + 1,\n  title: item.title,\n  snippet: item.snippet,\n  link: item.link,\n  domain: new URL(item.link).hostname,\n  source: 'Google Custom Search',\n  timestamp: new Date().toISOString()\n}));\n\nreturn processedResults;"
+      },
+      "id": "data-processing",
+      "name": "Process Search Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "binaryData": true,
+        "dataIsBase64Transformed": false,
+        "fileName": "=market_research_{{$now.format('YYYY-MM-DD_HHmmss')}}.csv",
+        "mimeType": "text/csv"
+      },
+      "id": "create-csv",
+      "name": "Generate CSV File",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oauth2",
+        "documentId": {
+          "value": "{{$secrets.GOOGLE_SHEETS_DOCUMENT_ID}}",
+          "__rl": true
+        },
+        "sheetName": "Market Research",
+        "columns": [
+          {
+            "display": "Rank",
+            "key": "rank"
+          },
+          {
+            "display": "Title",
+            "key": "title"
+          },
+          {
+            "display": "Snippet",
+            "key": "snippet"
+          },
+          {
+            "display": "Link",
+            "key": "link"
+          },
+          {
+            "display": "Domain",
+            "key": "domain"
+          },
+          {
+            "display": "Source",
+            "key": "source"
+          },
+          {
+            "display": "Timestamp",
+            "key": "timestamp"
+          }
+        ],
+        "options": {
+          "cellFormat": "USER_ENTERED",
+          "valueRenderOption": "FORMATTED_VALUE"
+        }
+      },
+      "id": "google-sheets-append",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [
+        1000,
+        400
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": "google_sheets_oauth"
+      }
+    },
+    {
+      "parameters": {
+        "path": "/output/research",
+        "fileName": "=market_research_{{$now.format('YYYY-MM-DD_HHmmss')}}.json",
+        "fileContent": "={{JSON.stringify({\n  query: $node['webhook-trigger'].json.query,\n  timestamp: new Date().toISOString(),\n  results: $node['data-processing'].json,\n  totalResults: $node['data-processing'].json.length,\n  status: 'completed'\n}, null, 2)}}"
+      },
+      "id": "write-json-file",
+      "name": "Write JSON Report",
+      "type": "n8n-nodes-base.writeLocalFile",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        550
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+        "sendBody": true,
+        "bodyParameters": [
+          {
+            "name": "text",
+            "value": "=🔍 Market Research Completed\n*Query:* {{$node['webhook-trigger'].json.query}}\n*Results Found:* {{$node['data-processing'].json.length}}\n*Status:* ✅ Success"
+          },
+          {
+            "name": "blocks",
+            "value": "=[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Market Intelligence Report*\\n*Query:* {{$node['webhook-trigger'].json.query}}\\n*Total Results:* {{$node['data-processing'].json.length}}\"}}]"
+          }
+        ]
+      },
+      "id": "slack-notification",
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "webhook-trigger": {
+      "main": [
+        [
+          {
+            "node": "google-search-api",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "google-search-api": {
+      "main": [
+        [
+          {
+            "node": "data-processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "data-processing": {
+      "main": [
+        [
+          {
+            "node": "google-sheets-append",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "write-json-file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "slack-notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "market-research-v1.0",
+  "meta": {
+    "instanceId": "corporate-gaston-explorer"
+  }
+}
