@@ -1,0 +1,32 @@
+# OSINT Tools Requirements - SAM-v3.0
+# Last updated: 2025-12-17
+
+# Core dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+selenium>=4.15.0
+python-dotenv>=1.0.0
+
+# API clients
+perplexity-sdk>=0.1.0
+# phantombuster-api (when available)
+# google-cloud-customsearch>=1.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# NLP & Text Processing
+nltk>=3.8.1
+transformers>=4.30.0
+
+# Logging & Monitoring
+loguru>=0.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Documentation
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.3.0
