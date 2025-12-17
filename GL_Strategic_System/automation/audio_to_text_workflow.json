@@ -1,0 +1,101 @@
+{
+  "name": "Audio to Text Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerPath": "/uploads/audio",
+        "watchEvents": "fileCreate",
+        "pollInterval": 60
+      },
+      "id": "node-1",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "header",
+        "sendBody": true,
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": [
+          {
+            "name": "file",
+            "value": "={{$binary.data}}"
+          },
+          {
+            "name": "model",
+            "value": "whisper-1"
+          }
+        ],
+        "headerParametersUi": "keyvaluepairs",
+        "headerParameters": [
+          {
+            "name": "Authorization",
+            "value": "Bearer {{$secrets.OPENAI_API_KEY}}"
+          }
+        ]
+      },
+      "id": "node-2",
+      "name": "HTTP Request - Whisper API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        300
+      ],
+      "credentials": {
+        "httpQueryAuth": "genericCredential"
+      }
+    },
+    {
+      "parameters": {
+        "filePath": "=/output/{{$node[\"Local File Trigger\"].json.filename | split(\".\")[0]}}.txt",
+        "fileData": "={{$node[\"HTTP Request - Whisper API\"].json.text}}"
+      },
+      "id": "node-3",
+      "name": "Write Text File",
+      "type": "n8n-nodes-base.writeLocalFile",
+      "typeVersion": 1,
+      "position": [
+        800,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - Whisper API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - Whisper API": {
+      "main": [
+        [
+          {
+            "node": "Write Text File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7c3fe4e9-4b2a-4a8f-9c1d-8e5f2b3a9c1d"
+}
