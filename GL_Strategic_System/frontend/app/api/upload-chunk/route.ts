@@ -3,228 +3,165 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 
-// ========== CONFIGURACIÓN ==========
-const UPLOAD_TEMP_DIR = path.join(os.tmpdir(), 'gl-strategic-uploads');
-const MAX_CHUNK_SIZE = 10 * 1024 * 1024; // 10MB máximo por chunk
-const REQUEST_TIMEOUT_MS = 30000; // 30 segundos timeout
+// ========== CONFIGURATION ==========
+const UPLOAD_TEMP_DIR = path.join(os.tmpdir(), 'sam-v3-uploads');
+const MAX_CHUNK_SIZE = 5 * 1024 * 1024; // 5MB maximum per chunk
+const REQUEST_TIMEOUT_MS = 30000; // 30 seconds timeout
+const MAX_FILENAME_LENGTH = 255;
+const ALLOWED_EXTENSIONS = ['.mp3', '.wav', '.ogg', '.m4a', '.flac'];
 
-// Crear directorio temporal si no existe
-if (!fs.existsSync(UPLOAD_TEMP_DIR)) {
-  fs.mkdirSync(UPLOAD_TEMP_DIR, { recursive: true });
-}
+// ========== UTILITIES ==========
 
-// ========== TIPOS ==========
-interface UploadRequest {
-  chunkIndex: number;
-  totalChunks: number;
-  uploadId: string;
-  fileName: string;
-}
-
-interface UploadResponse {
-  success: boolean;
-  chunkIndex: number;
-  totalChunks: number;
-  uploadId: string;
-  message: string;
-  timestamp: string;
-}
-
-// ========== VALIDACIONES ==========
 /**
- * Valida que los parámetros del upload sean válidos
+ * Sanitize filenames to prevent path traversal attacks
  */
-function validateUploadParams(
-  chunkIndex: string | number,
-  totalChunks: string | number,
-  uploadId: string,
-  fileName: string
-): { valid: boolean; error?: string } {
-  // Validar uploadId
-  if (!uploadId || typeof uploadId !== 'string' || uploadId.length < 10) {
-    return { valid: false, error: 'Invalid uploadId format' };
-  }
-
-  // Validar fileName
-  if (!fileName || typeof fileName !== 'string' || fileName.length === 0) {
-    return { valid: false, error: 'Invalid fileName' };
-  }
-
-  // Evitar path traversal attacks
-  if (fileName.includes('..') || fileName.includes('/') || fileName.includes('\\')) {
-    return { valid: false, error: 'Invalid fileName: path traversal detected' };
-  }
-
-  // Validar chunkIndex
-  const chunkIdx = Number(chunkIndex);
-  if (isNaN(chunkIdx) || chunkIdx < 0) {
-    return { valid: false, error: 'Invalid chunkIndex' };
-  }
-
-  // Validar totalChunks
-  const totalChnks = Number(totalChunks);
-  if (isNaN(totalChnks) || totalChnks <= 0 || totalChnks > 1000) {
-    return { valid: false, error: 'Invalid totalChunks' };
-  }
-
-  // Validar que chunkIndex < totalChunks
-  if (chunkIdx >= totalChnks) {
-    return { valid: false, error: 'chunkIndex >= totalChunks' };
-  }
-
-  return { valid: true };
+function sanitizeFilename(filename: string): string {
+  let sanitized = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+  sanitized = sanitized.substring(0, MAX_FILENAME_LENGTH);
+  sanitized = sanitized.replace(/^\.+/, ''); // Prevent hidden files
+  return sanitized || 'audio';
 }
 
 /**
- * Obtiene el path seguro del chunk temporal
+ * Validate session ID is a valid UUID
  */
-function getChunkPath(uploadId: string, chunkIndex: number): string {
-  // Sanitizar uploadId para seguridad
-  const sanitizedUploadId = uploadId.replace(/[^a-zA-Z0-9_-]/g, '');
-  return path.join(UPLOAD_TEMP_DIR, `${sanitizedUploadId}_chunk_${chunkIndex}`);
+function isValidSessionId(sessionId: string): boolean {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(sessionId);
 }
 
 /**
- * Obtiene info del directorio de uploads
+ * Validate allowed file types
  */
-function getUploadDirPath(uploadId: string): string {
-  const sanitizedUploadId = uploadId.replace(/[^a-zA-Z0-9_-]/g, '');
-  return path.join(UPLOAD_TEMP_DIR, sanitizedUploadId);
+function isAllowedFileType(filename: string): boolean {
+  const ext = path.extname(filename).toLowerCase();
+  return ALLOWED_EXTENSIONS.includes(ext);
 }
 
-// ========== HANDLER POST ==========
-export async function POST(request: NextRequest): Promise<NextResponse> {
-  const startTime = Date.now();
+// ========== MAIN POST HANDLER ==========
 
+export async function POST(request: NextRequest) {
   try {
-    // Validar método
-    if (request.method !== 'POST') {
+    // Timeout wrapper
+    return await Promise.race([
+      handleChunkUpload(request),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Request timeout')), REQUEST_TIMEOUT_MS)
+      )
+    ]) as Promise<NextResponse>;
+  } catch (error: any) {
+    console.error('[upload-chunk] Error:', error);
+    
+    if (error.message === 'Request timeout') {
       return NextResponse.json(
-        { error: 'Method not allowed' },
-        { status: 405 }
+        { error: 'Upload timeout' },
+        { status: 408 }
       );
     }
-
-    // Parsear FormData
-    let formData: FormData;
-    try {
-      formData = await request.formData();
-    } catch (error) {
-      console.error('❌ Error parsing FormData:', error);
-      return NextResponse.json(
-        { error: 'Invalid FormData' },
-        { status: 400 }
-      );
-    }
-
-    // Extraer parámetros
-    const file = formData.get('file') as Blob | null;
-    const chunkIndex = formData.get('chunkIndex');
-    const totalChunks = formData.get('totalChunks');
-    const uploadId = formData.get('uploadId') as string | null;
-    const fileName = formData.get('fileName') as string | null;
-
-    // Validar que file existe
-    if (!file || file.size === 0) {
-      return NextResponse.json(
-        { error: 'No file provided or file is empty' },
-        { status: 400 }
-      );
-    }
-
-    // Validar tamaño del chunk
-    if (file.size > MAX_CHUNK_SIZE) {
-      return NextResponse.json(
-        { error: `Chunk size exceeds maximum (${MAX_CHUNK_SIZE / 1024 / 1024}MB)` },
-        { status: 413 }
-      );
-    }
-
-    // Validar parámetros
-    const validation = validateUploadParams(chunkIndex, totalChunks, uploadId || '', fileName || '');
-    if (!validation.valid) {
-      return NextResponse.json(
-        { error: validation.error },
-        { status: 400 }
-      );
-    }
-
-    const chunkIdx = Number(chunkIndex);
-    const totalChnks = Number(totalChunks);
-    const uploadDir = getUploadDirPath(uploadId!);
-    const chunkPath = getChunkPath(uploadId!, chunkIdx);
-
-    // Crear directorio de uploads si no existe
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-
-    // Escribir chunk a disco
-    try {
-      const buffer = await file.arrayBuffer();
-      const uint8Array = new Uint8Array(buffer);
-      fs.writeFileSync(chunkPath, uint8Array);
-      console.log(`✓ Chunk ${chunkIdx + 1}/${totalChnks} written to disk (${(file.size / 1024).toFixed(2)}KB)`);
-    } catch (error) {
-      console.error(`❌ Error writing chunk to disk:`, error);
-      return NextResponse.json(
-        { error: 'Failed to write chunk to disk' },
-        { status: 500 }
-      );
-    }
-
-    // Verificar que el archivo se escribió correctamente
-    try {
-      const stats = fs.statSync(chunkPath);
-      if (stats.size !== file.size) {
-        fs.unlinkSync(chunkPath);
-        return NextResponse.json(
-          { error: 'Chunk size mismatch' },
-        { status: 400 }
-        );
-      }
-    } catch (error) {
-      console.error('❌ Error verifying chunk:', error);
-      return NextResponse.json(
-        { error: 'Failed to verify chunk' },
-        { status: 500 }
-      );
-    }
-
-    const duration = Date.now() - startTime;
-
-    const response: UploadResponse = {
-      success: true,
-      chunkIndex: chunkIdx,
-      totalChunks: totalChnks,
-      uploadId: uploadId!,
-      message: `Chunk ${chunkIdx + 1}/${totalChnks} received successfully`,
-      timestamp: new Date().toISOString(),
-    };
-
-    console.log(`📦 Upload successful: ${response.message} (${duration}ms)`);
-
-    return NextResponse.json(response, { status: 200 });
-  } catch (error) {
-    console.error('❌ Unexpected error in upload-chunk:', error);
+    
+    const statusCode = error.status || 500;
     return NextResponse.json(
-      {
-        error: 'Internal server error',
-        message: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 }
+      { error: error.message || 'Upload failed' },
+      { status: statusCode }
     );
   }
 }
 
-// ========== HANDLER OPTIONS (CORS) ==========
-export async function OPTIONS(request: NextRequest): Promise<NextResponse> {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, x-api-key',
-    },
+async function handleChunkUpload(request: NextRequest): Promise<NextResponse> {
+  if (!fs.existsSync(UPLOAD_TEMP_DIR)) {
+    fs.mkdirSync(UPLOAD_TEMP_DIR, { recursive: true });
+  }
+
+  const formData = await request.formData();
+  const sessionId = formData.get('sessionId') as string;
+  const chunkNumber = parseInt(formData.get('chunkNumber') as string, 10);
+  const totalChunks = parseInt(formData.get('totalChunks') as string, 10);
+  const filename = formData.get('filename') as string;
+  const chunkData = formData.get('chunk') as Blob;
+
+  // Validate inputs
+  if (!sessionId || !isValidSessionId(sessionId)) {
+    const error: any = new Error('Invalid session ID');
+    error.status = 400;
+    throw error;
+  }
+
+  if (!filename || !isAllowedFileType(filename)) {
+    const error: any = new Error('Invalid file type');
+    error.status = 400;
+    throw error;
+  }
+
+  if (isNaN(chunkNumber) || isNaN(totalChunks) || chunkNumber < 0 || totalChunks <= 0) {
+    const error: any = new Error('Invalid chunk parameters');
+    error.status = 400;
+    throw error;
+  }
+
+  if (!chunkData) {
+    const error: any = new Error('Missing chunk data');
+    error.status = 400;
+    throw error;
+  }
+
+  const chunkBuffer = Buffer.from(await chunkData.arrayBuffer());
+  
+  if (chunkBuffer.length > MAX_CHUNK_SIZE) {
+    const error: any = new Error(`Chunk exceeds ${MAX_CHUNK_SIZE / 1024 / 1024}MB`);
+    error.status = 413;
+    throw error;
+  }
+
+  // Create session directory
+  const sanitizedFilename = sanitizeFilename(filename);
+  const sessionDir = path.join(UPLOAD_TEMP_DIR, sessionId);
+  const chunksDir = path.join(sessionDir, 'chunks');
+
+  if (!fs.existsSync(chunksDir)) {
+    fs.mkdirSync(chunksDir, { recursive: true });
+  }
+
+  // Write chunk
+  const chunkPath = path.join(chunksDir, `chunk_${chunkNumber}`);
+  try {
+    fs.writeFileSync(chunkPath, chunkBuffer);
+  } catch (err: any) {
+    const error: any = new Error(`Failed to write: ${err.message}`);
+    error.status = 500;
+    throw error;
+  }
+
+  // Update metadata
+  const metadataPath = path.join(sessionDir, 'metadata.json');
+  const metadata = {
+    filename: sanitizedFilename,
+    totalChunks,
+    receivedChunks: 0,
+    totalSize: 0,
+    createdAt: new Date().toISOString(),
+  };
+
+  try {
+    const chunks = fs.readdirSync(chunksDir);
+    metadata.receivedChunks = chunks.length;
+    metadata.totalSize = chunks.reduce((sum, chunk) => {
+      try {
+        const stats = fs.statSync(path.join(chunksDir, chunk));
+        return sum + stats.size;
+      } catch {
+        return sum;
+      }
+    }, 0);
+  } catch {}
+
+  fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+
+  console.log(`[upload-chunk] ${chunkNumber}/${totalChunks} for session ${sessionId}`);
+
+  return NextResponse.json({
+    success: true,
+    sessionId,
+    chunkNumber,
+    totalChunks,
+    receivedChunks: metadata.receivedChunks,
   });
 }
