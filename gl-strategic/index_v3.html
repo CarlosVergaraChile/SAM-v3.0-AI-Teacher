@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GL Strategic | Engineering & Management</title>
+  <link rel="stylesheet" href="styles_v3.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">GL Strategic</div>
+      <ul class="nav-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#adn">Nuestro ADN</a></li>
+        <li><a href="#equipo">Nuestro Equipo</a></li>
+        <li><a href="#clientes">Nuestros Clientes</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO/INICIO -->
+  <section id="inicio" class="hero hero-with-bg">
+    <div class="hero-inner">
+      <h1>GL Strategic Engineering & Management</h1>
+      <h2>Su socio estratégico integral en Chile</h2>
+      <p>Anticipación estratégica + Ingeniería de Gestión + Redes de Inversión</p>
+      <a href="#contacto" class="btn-primary">Agendar Sesión</a>
+    </div>
+  </section>
+
+  <!-- NUESTRO ADN -->
+  <section id="adn" class="section adn-section">
+    <div class="section-inner">
+      <h2>Nuestro ADN: PPCI + Historia + Chile Profundo</h2>
+      <div class="adn-content">
+        <div class="adn-column">
+          <h3>Proyecto País del Colegio de Ingenieros (PPCI)</h3>
+          <p>Nuestra metodología se basa en el PPCI, un marco de anticipación estratégica que ha demostrado ser más preciso que bancos centrales e instituciones internacionales.</p>
+          <p><strong>Predicción PIB 2019:</strong> El PPCI anticipó la tendencia del PIB chileno con exactitud quirurgica, mientras que el Banco Central, FMI y Gobierno erraban sus proyecciones.</p>
+          <a href="https://proyectopais.blogspot.com" target="_blank" class="link-ppci">Ver PPCI Completo</a>
+        </div>
+        <div class="adn-column">
+          <canvas id="pibChart"></canvas>
+        </div>
+      </div>
+      <div class="adn-history">
+        <h3>Identidad Chilena: Historia sin Sesgo</h3>
+        <p>Para hacer negocios en Chile es necesario entender la cultura. Para entender la cultura es necesario entender la historia con una visión no sesgada.</p>
+        <p>Nuestro líder Gastón Huillier ha profundizado este entendimiento a través del análisis de la identidad chilena, su libro en desarrollo explora cómo la historia singularidad cultural define las oportunidades y riesgos en los negocios.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTRO EQUIPO -->
+  <section id="equipo" class="section equipo-section">
+    <h2>Nuestro Equipo de Liderazgo</h2>
+    <div class="team-grid">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="https://drive.google.com/uc?export=view&id=JUAN_BACOVICH" alt="Juan" />
+            <h4>Juan Bacovich</h4>
+            <p>Fundador & CEO</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Juan Bacovich</h4>
+            <p>Lidera vision estrategica de GL Strategic con 20 anos en transformacion.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="https://drive.google.com/uc?export=view&id=GASTON_HUILLIER" alt="Gaston" />
+            <h4>Gaston Huillier</h4>
+            <p>Director Estrategico</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Gaston Huillier</h4>
+            <p>Experto en identidad chilena e historia. Desarrolla entendimiento profundo del pais.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="https://drive.google.com/uc?export=view&id=CARLOS_VERGARA" alt="Carlos" />
+            <h4>Carlos Vergara</h4>
+            <p>Ingenieria de Gestion</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Carlos Vergara</h4>
+            <p>Especialista en implementacion de modelos de gestion y gobernanza corporativa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTROS CLIENTES -->
+  <section id="clientes" class="section clientes-section">
+    <h2>Nuestros Clientes</h2>
+    <div class="clients-grid">
+      <div class="client-card"><span class="client-placeholder">Logo 1</span></div>
+      <div class="client-card"><span class="client-placeholder">Logo 2</span></div>
+      <div class="client-card"><span class="client-placeholder">Logo 3</span></div>
+      <div class="client-card"><span class="client-placeholder">Logo 4</span></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section contacto-section">
+    <h2>Contacto</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>GL Strategic</h3>
+        <p>Email: contacto@glstrategic.cl</p>
+        <p>Telefono: +56 9 7609 3848</p>
+      </div>
+      <form class="contact-form">
+        <input type="text" placeholder="Nombre" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="Mensaje" rows="5"></textarea>
+        <button type="submit" class="btn-primary">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; GL Strategic Engineering & Management | Chile 2025</p>
+  </footer>
+
+  <script>
+    // Grafico de PIB
+    const ctx = document.getElementById('pibChart').getContext('2d');
+    const pibChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2015', '2016', '2017', '2018', '2019'],
+        datasets: [
+          {
+            label: 'PPCI Prediccion',
+            data: [2.4, 2.1, 1.7, 2.5, 1.8],
+            borderColor: '#ffd166',
+            backgroundColor: 'rgba(255, 209, 102, 0.1)',
+            tension: 0.1
+          },
+          {
+            label: 'Realidad',
+            data: [2.3, 1.7, 1.3, 2.2, 1.8],
+            borderColor: '#00ff88',
+            backgroundColor: 'rgba(0, 255, 136, 0.1)',
+            tension: 0.1
+          },
+          {
+            label: 'Banco Central',
+            data: [2.8, 2.2, 1.9, 2.8, 2.2],
+            borderColor: '#ff6b6b',
+            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true }
+        },
+        scales: {
+          y: { beginAtZero: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
