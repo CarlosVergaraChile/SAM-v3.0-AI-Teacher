@@ -50,6 +50,209 @@ Este documento contiene:
 24. Marcelo Russo - Consultor Asociado
 25. Elena Pailamilla S. - Consultora
 
+---
+
+## 📋 INFORMACIÓN DETALLADA DEL EQUIPO
+
+> **Fuente:** Directorio-Consultores-GL-2025.xlsx
+
+### SOCIOS PRINCIPALES
+
+#### 1. Gastón L'Huillier T. - Socio Principal ⚠️ FOTO A COLORES
+- **Grados Académicos:** Ing. Civil Industrial, Magíster en Economía U. Chile
+- **Expertise:** Diseño Organizacional, Estrategia y Gestión de Inversiones
+- **LinkedIn:** https://www.linkedin.com/in/gaston-l-huillier-troncoso-55a24128
+
+#### 2. Rafael Sotil Bidart - Socio
+- **Grados Académicos:** Ing. Civil Industrial U. Chile, MBA Tulane
+- **Expertise:** Liderazgo Adaptativo, Cambio Cultural y Coaching Ontológico
+- **Experiencia:** Coach Certificado Newfield. Liderazgo ejecutivo y gestión emocional
+- **LinkedIn:** https://www.linkedin.com/in/rafaelsotil
+
+#### 3. Guillermo Muñoz H. - Socio
+- **Grados Académicos:** Ing. Informático U. Concepción. Dipl. Consultoría
+- **Expertise:** Estrategia de Transformación Digital y Eficiencia CAM
+- **Experiencia:** Ex Gerente de Sistemas Petrox y Director de Procesos en ENAP
+- **LinkedIn:** https://www.linkedin.com/in/guillermomunoz
+
+#### 4. Carlos Vergara Del Río - Socio
+- **Grados Académicos:** Ing. Civil Industrial, Magíster U. Chile, MBA ESADE
+- **Expertise:** Mejoramiento de Procesos y fortalecimiento de equipos
+- **Experiencia:** Ejecutivo, consultor y profesor U. de Chile y UNAB
+- **LinkedIn:** https://www.linkedin.com/in/carlosvergarachile
+
+#### 5. Edith Wilson Porter - Socia Legal
+- **Grados Académicos:** Abogado UDP, Master Derecho Empresa U. Andes
+- **Expertise:** Derecho Corporativo, M&A, Licitaciones e Inversión
+- **Experiencia:** Asesoría integral en decisiones societarias y reestructuraciones
+- **LinkedIn:** https://www.linkedin.com/in/edith-wilson-porter-6b1234b4
+
+#### 6. Juan Manuel Fernández - Socio Alianza
+- **Grados Académicos:** Ing. Comercial U. Chile, MBA Chicago
+- **Expertise:** Planificación Estratégica y Control de Gestión
+- **Experiencia:** Presidente Consulting Associates. Ex ejecutivo Endesa y Entel
+- **LinkedIn:** https://www.linkedin.com/in/juan-manuel-fernandez-mckendrick-21412132
+
+#### 7. Claudio Hohmann - Socio Alianza
+- **Grados Académicos:** Ing. Civil Industrial PUC
+- **Expertise:** Asuntos Corporativos, Transporte y Logística
+- **Experiencia:** Ex Ministro de Transportes. Director de empresas Metro, SMU
+- **LinkedIn:** https://www.linkedin.com/in/claudio-hohmann-70744a86
+
+### CONSULTORES SENIOR Y ASOCIADOS
+
+#### 8. Gastón L'Huillier Ch. - Consultor Asociado ⚠️ FOTO B/N
+- **Grados Académicos:** Ing. Civil Computación, Magíster U. Chile
+- **Expertise:** Inteligencia Artificial, Big Data y Minería de Datos
+- **Experiencia:** 6 patentes USA. Ex Data Scientist Groupon Palo Alto. Startups
+- **LinkedIn:** https://www.linkedin.com/in/glhuilli
+
+#### 9. Maurice Filippi R. - Consultor Asociado
+- **Grados Académicos:** Ing. Civil Industrial, Magíster U. Chile
+- **Expertise:** Costos ABC, Balanced Scorecard y Diseño Organizacional
+- **Experiencia:** Proyectos eficiencia retail/banca. Profesor cátedra U. de Chile
+- **LinkedIn:** https://www.linkedin.com/in/maurice-filippi-rademacher-ba4380101
+
+#### 10. Pablo Vega Buccicardi - Consultor Asociado
+- **Grados Académicos:** Economista, Psicólogo, MBA UDD
+- **Expertise:** Innovación, Modelación Financiera y Evaluación Proyectos
+- **Experiencia:** Director CICE-Perú. Especialista en emprendimiento y estrategia digital
+- **LinkedIn:** https://www.linkedin.com/in/pablovegabuccicardi
+
+#### 11. Gilberto Céspedes G. - Consultor Senior
+- **Grados Académicos:** Ing. Civil y MBA PUC
+- **Expertise:** Supply Chain, Due Diligence y Contratos Mineros
+- **LinkedIn:** https://www.linkedin.com/in/gilberto-cespedes-43b2b799
+
+#### 12. José Ignacio Martínez - Consultor Senior
+- **Grados Académicos:** Ing. Comercial PUC
+- **Expertise:** Reestructuración Financiera y Shared Service Centers
+- **Experiencia:** Ex Gte. Finanzas multinacionales Gillette, PepsiCo. Control regional
+- **LinkedIn:** https://www.linkedin.com/in/jose-ignacio-martinez-acevedo-41683845
+
+#### 13. Juan Ramón Samaniego - Consultor Senior
+- **Grados Académicos:** Ing. Comercial U. Chile
+- **Expertise:** Benchmarking, EVA, ABC y Finanzas Corporativas
+- **Experiencia:** Ex Seremi Hacienda. Asesor económico. Experto gestión estratégica
+- **LinkedIn:** https://www.linkedin.com/in/juan-ramon-samaniego-sangroniz-82b315a3
+
+#### 14. Rodrigo Villena Nieto - Consultor Senior
+- **Grados Académicos:** Ing. Civil Industrial PUC
+- **Expertise:** Gestión Financiera, Comercial y Sistemas SAP
+- **Experiencia:** CEO VMT Soluciones. Gerencia retail, minería y energía
+- **LinkedIn:** https://www.linkedin.com/in/rodrigo-villena-a7bb8a8
+
+#### 15. José Rojas Ubilla - Consultor Senior
+- **Grados Académicos:** Ing. Civil Metalúrgico UTFSM
+- **Expertise:** Innovación Tecnológica y Nuevos Negocios Industriales
+- **Experiencia:** Ex Gerente I+D CINTAC. Transformación de tecnologías
+- **LinkedIn:** https://www.linkedin.com/in/josé-rojas-ubilla-660a6652
+
+#### 16. Sergio Martínez - Consultor Senior
+- **Grados Académicos:** Ing. Industrial Eléctrico PUC
+- **Expertise:** Operaciones y Desarrollo de Negocios Pesqueros
+- **LinkedIn:** https://www.linkedin.com/in/sergio-martinez-a387b045?locale=en_US
+
+#### 17. Cristián Durán Egle - Consultor Senior
+- **Grados Académicos:** Economista Alemania, Ing. Comercial
+- **Expertise:** Finanzas, Administración y Estrategia Productiva
+- **Experiencia:** Ex Director Corfo XIV Región. Sector agrícola y productivo
+- **LinkedIn:** https://www.linkedin.com/in/cristian-duran-8452255
+
+#### 18. Angelo Cerda R. - Consultor Asociado
+- **Grados Académicos:** Ing. Administración UDD, Magíster U.C
+- **Expertise:** Estrategia, Control de Gestión y Negociación
+- **Experiencia:** 20 años experiencia áreas financieras y gestión empresarial
+- **LinkedIn:** https://www.linkedin.com/in/angelo-cerda-rodriguez
+
+#### 19. María Loreto Leiva - Consultora Asociada
+- **Grados Académicos:** Ing. Civil Informática UTFSM
+- **Expertise:** Rediseño de Procesos y Gestión de Calidad ISO
+- **Experiencia:** Auditoría ISO 9001. Mejora procesos sector público/privado
+- **LinkedIn:** https://www.linkedin.com/in/maría-loreto-leiva-cantarellas-a1ab84a6
+
+#### 20. Mario Boada - Consultor Comms
+- **Grados Académicos:** Master Periodismo Missouri
+- **Expertise:** Comunicación Estratégica Digital y Medios Online
+- **Experiencia:** Fundador Canal 13 Online y TVN Online. 30 años experiencia
+- **LinkedIn:** https://www.linkedin.com/in/marioboada
+
+#### 21. Nicole L'Huillier C. - Consultora Asociada
+- **Grados Académicos:** Arquitecta U. Chile, PhD Student MIT
+- **Expertise:** Innovación Creativa, Espacios Interactivos y Tecnología
+- **Experiencia:** Investigadora MIT Media Lab. Diseño y tecnología aplicada
+- **Website:** https://nicolelhuillier.com
+
+### OTROS CONSULTORES
+
+#### 22. Paula Castro - Consultora Asociada
+- **Grados Académicos:** Magíster Planificación UCLA, Psicóloga
+- **Expertise:** Desarrollo Regional, Innovación y Planificación
+- **Experiencia:** Evaluación de programas públicos y estrategias territoriales
+- **LinkedIn:** https://www.linkedin.com/in/paula-castro-visión-cultura-estrategia
+
+#### 23. Tomás L'Huillier - Consultor Asociado
+- **Grados Académicos:** Psicólogo PUC, Doctorando UAH
+- **Expertise:** Comportamiento Humano y Parametrización BSC
+- **Experiencia:** Psicología clínica aplicada a gestión organizacional
+- **LinkedIn:** https://www.linkedin.com/in/tlhuillier
+
+#### 24. Marcelo Russo - Consultor Asociado
+- **Perfil:** Técnico TICs
+- **Expertise:** Transformación Digital y Tecnologías de Información
+- **Experiencia:** Especialista en implementación de soluciones TICs
+- **LinkedIn:** https://www.linkedin.com/in/marcelo-russo-90350887
+
+#### 25. Elena Pailamilla S. - Consultora
+- **Perfil:** Técnico
+- **Expertise:** Normativa Contable, Tributaria y Administrativa
+- **Experiencia:** Soporte especializado en gestión administrativa y cumplimiento
+- **LinkedIn:** https://www.linkedin.com/in/🇨🇱-elena-pailamilla-sandoval-10523010a
+
+### DIRECTORES REGIONALES Y GERENCIA
+
+#### Juan Carlos Bacovich - Director Regional Antofagasta
+- **Grados Académicos:** Ing. Químico UCN
+- **Expertise:** Calidad ISO y Estándares de Servicio al Cliente
+- **Experiencia:** Ex Gerente Goodyear Chile. Asesor grandes empresas industriales
+- **LinkedIn:** https://www.linkedin.com/in/juan-carlos-bacovich
+
+#### Paulina L'Huillier - Gerente Consultoría
+- **Grados Académicos:** Ing. Comercial U. Chile
+- **Expertise:** Costos ABC y Diseño Organizacional
+- **Experiencia:** Líder proyectos implantación banca, retail y sector público
+- **LinkedIn:** https://www.linkedin.com/in/paulina-lhuillier-08512874
+
+#### Alejandro Cabrera - Director Regional Arica
+- **Grados Académicos:** Ing. Civil Electricista USACH
+- **Expertise:** Planificación Tecnológica y Gestión de Proyectos
+- **Experiencia:** 30 años experiencia gerencial CTC. Director AricaConTodo
+- **LinkedIn:** https://www.linkedin.com/in/alejandro-cabrera-485531396?originalSubdomain=cl
+
+#### Julio Muñoz Díaz - Director Regional Maule
+- **Grados Académicos:** Ing. Civil Industrial, Master Políticas Públicas
+- **Expertise:** Prospectiva, Estrategia y Desarrollo Territorial
+- **Experiencia:** Ex Director carrera UST Talca. Experto gestión pública
+- **LinkedIn:** https://www.linkedin.com/in/juliomunozdiaz
+
+#### Jaime Soto Zura - Director Regional Tarapacá
+- **Perfil:** Profesional de Gestión
+- **Expertise:** Gestión Inmobiliaria, Logística y Comercio Exterior
+- **Experiencia:** Experiencia en Zofri y gestión de centros comerciales
+- **LinkedIn:** https://www.linkedin.com/in/jaime-soto-zura-0a060220b?originalSubdomain=cl
+
+#### Pablo Canobra - Director Regional Los Lagos
+- **Expertise:** Gestión Regional Zona Sur
+- **LinkedIn:** https://www.linkedin.com/in/pablocanobra?originalSubdomain=cl
+
+#### Jenny Sauterel - Directora Regional Concepción
+- **Expertise:** Gestión Regional Zona Sur
+- **LinkedIn:** https://www.linkedin.com/in/jenny-sauterel-2041a42a?originalSubdomain=cl
+
+#### Alejandro Rodo - Director Regional Concepción
+- **Expertise:** Gestión Regional Zona Sur
+- **LinkedIn:** https://www.linkedin.com/in/alejandro-rodo-leon-79279b72
+
 ### ⚠️ IMPORTANTE - FOTOS DE LOS GASTONES
 - **Gastón L'Huillier T.** (Socio Principal) → FOTO A COLORES
 - **Gastón L'Huillier Ch.** (Consultor Asociado) → FOTO BLANCO Y NEGRO
