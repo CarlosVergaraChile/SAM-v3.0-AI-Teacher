@@ -1,0 +1,71 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f8f9fa; color: #333; line-height: 1.6; }
+
+/* NAVBAR */
+.navbar { position: sticky; top: 0; z-index: 1000; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 1rem 2rem; }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 1.5rem; font-weight: 700; color: #2c5282; }
+.logo span { color: #4299e1; }
+.subtitle { font-size: 0.7rem; color: #718096; letter-spacing: 0.05em; margin-top: -0.3rem; }
+.nav-menu { display: flex; list-style: none; gap: 2rem; }
+.nav-menu a { text-decoration: none; color: #2d3748; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; }
+.nav-menu a:hover { color: #4299e1; }
+
+/* HERO */
+.hero { min-height: 100vh; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative; }
+.hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(44, 82, 130, 0.55); }
+.hero-content { position: relative; z-index: 10; max-width: 800px; text-align: center; color: white; }
+.hero-tag { font-size: 0.85rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+.hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2; }
+.hero-desc { font-size: 1.1rem; margin-bottom: 1rem; color: rgba(255,255,255,0.95); max-width: 600px; margin-left: auto; margin-right: auto; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
+.badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.95rem; backdrop-filter: blur(10px); }
+
+/* SECTION */
+.section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section h2 { font-size: 2.5rem; color: #2c5282; margin-bottom: 2rem; text-align: center; }
+.section-subtitle { color: #718096; text-align: center; margin-bottom: 2rem; font-size: 1.05rem; }
+
+/* ADN */
+.adn-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.adn-col h3 { color: #2c5282; font-size: 1.4rem; margin-bottom: 1rem; }
+.adn-col p { color: #4a5568; margin-bottom: 1rem; }
+
+/* SERVICES */
+.services { background: #edf2f7; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.service-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.service-card h3 { color: #2c5282; font-size: 1.3rem; margin-bottom: 1rem; }
+.service-card p { color: #4a5568; margin-bottom: 1rem; font-size: 0.95rem; }
+.service-card ul { margin-left: 1rem; color: #718096; }
+.service-card li { margin-bottom: 0.5rem; }
+
+/* TEAM */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.team-member { text-align: center; }
+.member-avatar { width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.5rem; }
+.team-member h4 { color: #2c5282; font-size: 1.2rem; margin-bottom: 0.3rem; }
+.team-member p { color: #718096; }
+
+/* CLIENTS */
+.clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.client-placeholder { background: #edf2f7; border: 2px dashed #cbd5e0; padding: 2rem; border-radius: 8px; text-align: center; color: #718096; font-weight: 500; }
+
+/* CONTACT */
+.contact { background: #edf2f7; }
+.contact-content { max-width: 600px; margin: 0 auto; text-align: center; }
+.contact-content h3 { color: #2c5282; font-size: 1.5rem; margin-bottom: 1rem; }
+.contact-content p { color: #4a5568; margin-bottom: 1.5rem; }
+.contact-info p { font-size: 1.05rem; color: #2c5282; margin: 0.5rem 0; }
+
+/* FOOTER */
+.footer { text-align: center; padding: 2rem; background: #2c5282; color: white; font-size: 0.9rem; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .adn-content, .services-grid, .team-grid, .clients-grid { grid-template-columns: 1fr; }
+  .nav-menu { gap: 1rem; font-size: 0.85rem; }
+  .section { padding: 2rem 1rem; }
+}
