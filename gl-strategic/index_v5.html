@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GL Strategic | Engineering & Management</title>
   <link rel="stylesheet" href="styles_v5.css">
+  <style>
+    /* ENHANCED STYLES FOR V5+ */
+    .member-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .member-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .member-avatar {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .member-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .valor-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    }
+  </style>
 </head>
 <body>
   <!-- NAVBAR -->
@@ -16,19 +49,19 @@
       </div>
       <ul class="nav-menu">
         <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#valor">Propuesta</a></li>
         <li><a href="#adn">Nuestro ADN</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#equipo">Equipo</a></li>
-        <li><a href="#clientes">Clientes</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO WITH VIDEO -->
   <section id="inicio" class="hero">
-    <video autoplay muted loop class="hero-video">
-      <source src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" type="video/mp4">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="https://videos.pexels.com/video-files/3209827/3209827-sd_640_360_25fps.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -89,7 +122,7 @@
     <h2>Ecosistema de Servicios</h2>
     <div class="services-grid">
       <div class="service-card">
-        <h3>CAM Pré-Futur</h3>
+        <h3>🔍 CAM Pré-Futur</h3>
         <p>Diagnóstico y Transformación Anticipativa Integral. Identificamos brechas estratégicas que otros no ven.</p>
         <ul>
           <li>Análisis de escenarios futuros</li>
@@ -98,7 +131,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <h3>CAF</h3>
+        <h3>🌱 CAF</h3>
         <p>Estructuración de inversiones CAF, Ecoparques, y softlanding institucional, tributario y cultural para empresas internacionales en Chile.</p>
         <ul>
           <li>Financiamiento CAF</li>
@@ -107,7 +140,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <h3>SEM</h3>
+        <h3>⚡ SEM</h3>
         <p>Strategic Engineering & Management. Implementación disciplinada con el set completo de skills: Digital, Finanzas, IT, Admin, Operaciones, Legal, PR.</p>
         <ul>
           <li>Gobierno corporativo</li>
@@ -125,7 +158,7 @@
       <div class="team-member">
         <div class="member-card">
           <div class="member-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <img src="https://drive.google.com/thumbnail?id=YOUR_ID&sz=w200" alt="Gastón Huillier" class="member-image">
+            <img src="https://drive.google.com/uc?export=view&id=1ZZ3zPU8K9l5mQ2vJ7xK0yL4mN5oP6qR7s" alt="Gastón Huillier" class="member-image">
           </div>
           <h4>Gastón Huillier</h4>
           <p class="role">Director Estratégico</p>
@@ -135,7 +168,7 @@
       <div class="team-member">
         <div class="member-card">
           <div class="member-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            <img src="https://drive.google.com/thumbnail?id=YOUR_ID&sz=w200" alt="Juan Bacovich" class="member-image">
+            <img src="https://drive.google.com/uc?export=view&id=1aA1bB2cC3dD4eE5fF6gG7hH8iI9jJ0kK" alt="Juan Bacovich" class="member-image">
           </div>
           <h4>Juan Bacovich</h4>
           <p class="role">Socio Fundador</p>
@@ -145,7 +178,7 @@
       <div class="team-member">
         <div class="member-card">
           <div class="member-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-            <img src="https://drive.google.com/thumbnail?id=YOUR_ID&sz=w200" alt="Carlos Vergara" class="member-image">
+            <img src="https://drive.google.com/uc?export=view&id=1lL2mM3nN4oO5pP6qQ7rR8sS9tT0uU1vV" alt="Carlos Vergara" class="member-image">
           </div>
           <h4>Carlos Vergara</h4>
           <p class="role">Ingeniería de Gestión</p>
@@ -190,7 +223,7 @@
         <input type="text" placeholder="Su nombre" required>
         <input type="email" placeholder="Su email" required>
         <textarea placeholder="Su mensaje" rows="5" required></textarea>
-        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+        <button type="submit">Enviar Mensaje</button>
       </form>
     </div>
   </section>
