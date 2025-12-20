@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Asistente Inteligente - App móvil de búsqueda de contactos">
+    <meta name="theme-color" content="#0052a3">
+    <title>🤖 Asistente Inteligente - App Móvil</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #0052a3;
+            --secondary: #00a8e8;
+            --success: #10b981;
+            --error: #ef4444;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .search-section {
+            background: var(--bg-white);
+            padding: 2rem 1rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.1);
+        }
+        
+        .search-button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            min-width: 120px;
+        }
+        
+        .search-button:active {
+            transform: scale(0.98);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .contact-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-light);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        
+        .contact-label {
+            font-weight: 600;
+            color: var(--text-light);
+            min-width: 80px;
+        }
+        
+        .contact-value {
+            color: var(--text-dark);
+            word-break: break-all;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error-msg {
+            background: #fee;
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-button {
+                width: 100%;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span>🤖</span>
+            Asistente Inteligente
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section class="search-section">
+            <h1 style="margin-bottom: 1rem;">🔍 Buscar Contacto</h1>
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Ingresa nombre del contacto (ej: Carlos, María...)"
+                    autocomplete="off"
+                >
+                <button id="searchButton" class="search-button">Buscar</button>
+            </div>
+        </section>
+        
+        <div id="resultsContainer"></div>
+        
+        <div id="emptyState" class="empty-state">
+            <p style="font-size: 2rem; margin-bottom: 1rem;">🔍</p>
+            <p>Usa el buscador para encontrar contactos</p>
+        </div>
+    </div>
+    
+    <script>
+        const API_ENDPOINT = 'https://orquesta.app.n8n.cloud/webhook/asistente-inteligente';
+        const CACHE_KEY = 'asistente_cache';
+        const CACHE_EXPIRY = 3600000;
+        
+        let debounceTimer = null;
+        let cache = loadCache();
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const emptyState = document.getElementById('emptyState');
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+        searchButton.addEventListener('click', handleSearch);
+        
+        async function handleSearch() {
+            const query = searchInput.value.trim();
+            
+            if (!query) {
+                emptyState.style.display = 'block';
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            
+            const cached = getFromCache(query);
+            if (cached) {
+                displayResults(cached);
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: query,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const data = await response.json();
+                saveToCache(query, data);
+                displayResults(data);
+                
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+        
+        function displayResults(results) {
+            emptyState.style.display = 'none';
+            resultsContainer.innerHTML = '<h2 style="margin-bottom: 1rem;">Resultados</h2>';
+            
+            if (!results || results.length === 0) {
+                resultsContainer.innerHTML += '<p style="color: var(--text-light);">No se encontraron resultados</p>';
+                return;
+            }
+            
+            const grid = document.createElement('div');
+            grid.className = 'results-grid';
+            
+            results.forEach(contact => {
+                const card = document.createElement('div');
+                card.className = 'contact-card';
+                card.innerHTML = `
+                    <div class="contact-name">${escapeHtml(contact.name || 'Sin nombre')}</div>
+                    ${contact.email ? `<div class="contact-detail"><span class="contact-label">Email:</span><span class="contact-value">${escapeHtml(contact.email)}</span></div>` : ''}
+                    ${contact.phone ? `<div class="contact-detail"><span class="contact-label">Teléfono:</span><span class="contact-value">${escapeHtml(contact.phone)}</span></div>` : ''}
+                    ${contact.source ? `<div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-light);">📍 Fuente: ${escapeHtml(contact.source)}</div>` : ''}
+                `;
+                grid.appendChild(card);
+            });
+            
+            resultsContainer.appendChild(grid);
+        }
+        
+        function showLoading() {
+            emptyState.style.display = 'none';
+            resultsContainer.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+        }
+        
+        function showError(message) {
+            emptyState.style.display = 'none';
+            resultsContainer.innerHTML = `<div class="error-msg">⚠️ ${message}</div>`;
+        }
+        
+        function getFromCache(key) {
+            const item = cache[key];
+            if (item && Date.now() - item.timestamp < CACHE_EXPIRY) {
+                return item.data;
+            }
+            return null;
+        }
+        
+        function saveToCache(key, data) {
+            cache[key] = { data, timestamp: Date.now() };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+        }
+        
+        function loadCache() {
+            try {
+                return JSON.parse(localStorage.getItem(CACHE_KEY)) || {};
+            } catch {
+                return {};
+            }
+        }
+        
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>
