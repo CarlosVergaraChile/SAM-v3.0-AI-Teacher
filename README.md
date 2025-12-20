@@ -259,3 +259,76 @@ Ver [deploy-guide/ECOSYSTEM_ARCHITECTURE.md](https://github.com/CarlosVergaraChi
 - **GL Strategic MVP**: Consultoría coordinada por orquestadora
 
 **SAM v3.0** integra curso-module-standard, payment-gateway-standard y seasonal-market-standard para máxima reutilización.
+
+
+---
+
+## 🎯 GL Strategic - Team Flip Cards Implementation (Diciembre 2025)
+
+### Descripción
+Implementación de tarjetas interactivas con efecto 3D flip para visualizar el equipo de GL Strategic. La solución incluye 25 miembros profesionales organizados por categoría (Socios, Consultores, Otros) con diseño responsive y animaciones modernas.
+
+### Características Principales
+
+#### ✨ Tarjetas de Equipo Interactivas
+- **3D Flip Cards**: Efecto de rotación 3D al pasar el cursor
+- **25 Miembros**: Socios (7), Consultores (14), Otros (4)
+- **Información Dual**: Frente muestra nombre/rol, reverso muestra descripción profesional
+- **Color-Coding**: Colores distintivos por categoría
+  - 🔴 Socios: Rojo (#ff6b6b)
+  - 🔵 Consultores: Turquesa (#4ecdc4)
+  - 🟡 Otros: Amarillo (#ffd166)
+
+#### 📱 Diseño Responsive
+- **Desktop** (≥1200px): 10 tarjetas por fila
+- **Tablet** (992-1199px): 6-8 tarjetas por fila
+- **Mobile** (576-991px): 3-4 tarjetas por fila
+- **Ultra-mobile** (<576px): 2 tarjetas por fila
+
+#### 🎨 Tecnologías Implementadas
+- **CSS**: Grid layout, 3D transforms, media queries
+- **JavaScript**: Generación dinámica de tarjetas, población automática de datos
+- **HTML5**: Estructura semántica con contenedores por rol
+- **Font Awesome**: Iconografía integrante via CDN
+
+### Datos del Equipo
+
+#### SOCIOS (7)
+1. Gastón L'Huillier T. - Socio Principal
+2. Rafael Sotil Bidart - Socio
+3. Guillermo Muñoz H. - Socio
+4. Carlos Vergara Del Río - Socio
+5. Edith Wilson Porter - Socia Legal
+6. Juan Manuel Fernández - Socio Alianza
+7. Claudio Hohmann - Socio Alianza
+
+#### CONSULTORES (14)
+8. Gastón L'Huillier Ch. - Consultor Asociado
+9. Maurice Filippi R. - Consultor Asociado
+10. Pablo Vega Buccicardi - Consultor Asociado
+11. Gilberto Céspedes G. - Consultor Senior
+12. José Ignacio Martínez - Consultor Senior
+13. Juan Ramón Samaniego - Consultor Senior
+14. Rodrigo Villena Nieto - Consultor Senior
+15. José Rojas Ubilla - Consultor Senior
+16. Sergio Martínez - Consultor Senior
+17. Cristián Durán Egle - Consultor Senior
+18. Angelo Cerda R. - Consultor Asociado
+19. María Loreto Leiva - Consultora Asociada
+20. Mario Boada - Consultor Comms
+21. Nicole L'Huillier C. - Consultora Asociada
+
+#### OTROS (4)
+22. Paula Castro - Consultora Asociada
+23. Tomás L'Huillier - Consultor Asociado
+24. Marcelo Russo - Consultor Asociado
+25. Elena Pailamilla S. - Consultora
+
+### Url del Sitio
+🔗 [GL Strategic - Live Site](https://carlosvergarachile.github.io/SAM-v3.0-AI-Teacher/gl-strategic/)
+
+### Archivos Modificados
+- `gl-strategic/index.html` - Agregadas secciones de equipo, CSS y JavaScript
+
+### Commit Relacionado
+- `Add comprehensive team flip cards with 25 members and styling`
