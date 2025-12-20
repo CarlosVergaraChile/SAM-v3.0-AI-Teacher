@@ -6,8 +6,7 @@ Crear el sitio web corporativo de **GL Strategic | Engineering & Management** co
 - 25 personas del equipo en flip cards pequeñas (8-10 por fila en desktop)
 - Videos de fondo en secciones hero
 - Navbar: Inicio | Nuestro ADN | Nuestros Servicios | Nuestro Equipo | Contacto
-- Paleta de colores: Azul marino (#0052a3) + Cyan (#00a8e8)
-
+- Paleta de colores: Blanco (navbar), Azul claro/celeste (hero y botones)
 ## 📋 FUENTE DE VERDAD
 **Documento maestro:** `Maqueta-version-08.docx`
 
