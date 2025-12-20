@@ -483,3 +483,23 @@ Si pierdes contexto, consulta en este orden:
 **Última actualización:** 19 de diciembre 2025, 20:10 hrs
 **Versión:** 1.1
 **Actualizado por:** Claude (Sonnet 4.5)
+
+### index_v7.html
+
+* **Fecha:** 19 dic 2025
+* **Descripción:** Versión final con estructura base lista, preparada para la integración de contenidos completos
+* **Status:** ✅ Subida a GitHub - Lista para testing y enhancements
+* **Características:**
+  - Navbar con logo (preponderancia visual mejorada)
+  - Hero section con video de fondo
+  - Secciones: ADN, Servicios, Equipo, Contacto
+  - Estructura responsive básica
+  - Preparada para agregar logo de GL Strategic
+  - Lista para integración de 25 miembros del equipo
+
+**Próximos pasos:**
+- Agregar logo de GL Strategic en `assets/images/`
+- Integrar contenidos completos del Word v08
+- Implementar flip cards para 25 miembros
+- Mejorar estilos CSS con v7
+- Testing en múltiples navegadores
