@@ -231,7 +231,7 @@ Este documento contiene:
 #### Julio Muñoz Díaz - Director Regional Maule
 - **Grados Académicos:** Ing. Civil Industrial, Master Políticas Públicas
 - **Expertise:** Prospectiva, Estrategia y Desarrollo Territorial
-- **Experiencia:** Ex Director carrera UST Talca. Experto gestión pública
+- **Experiencia:** Ex Director carrera UST Talca. Experto gestión pública 
 - **LinkedIn:** https://www.linkedin.com/in/juliomunozdiaz
 
 #### Jaime Soto Zura - Director Regional Tarapacá
