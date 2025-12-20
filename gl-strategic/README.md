@@ -502,3 +502,74 @@ Si pierdes contexto, consulta en este orden:
 - Implementar flip cards para 25 miembros
 - Mejorar estilos CSS con v7
 - Testing en múltiples navegadores
+
+
+## 🎯 PLAN DE ACCIÓN - index-v8.html (VERSIÓN INTEGRADA FINAL)
+
+**Estado:** 🔄 EN PROCESO
+**Fecha:** 19 de diciembre 2025
+
+### Componentes a Integrar (DE LOS 4 ARCHIVOS PROPORCIONADOS):
+
+#### 1. Sección CLIENTES (DE: index-verde-clientes.html)
+- ✅ Accordion por sector (Minería, Banca, Utilities, Público, Educación)
+- ✅ Grilla de clientes por categoría
+- ✅ Diseño responsive
+- **Archivo ref:** index-verde-clientes.html (sección #clientes)
+
+#### 2. Gráfica PIB (DE: index-pib-2.html)
+- ✅ Chart.js animado (Banco Central vs GL Strategic)
+- ✅ Tabla histórica (2008-2023)
+- ✅ Párrafo "Falacia del Espejo Retrovisor"
+- ✅ McKinsey cinematic hero style
+- **Archivo ref:** index-pib-2.html (sección #pib)
+
+#### 3. Servicios Flip Cards 3D (DE: index-detalle-servicios.html)
+- ✅ Flip cards para CAM/SEM/CAF
+- ✅ Diagrama 3D Pr-Futur central
+- ✅ Glassmorphism effect
+- ✅ JavaScript renders para auto-generar cards
+- **Archivo ref:** index-detalle-servicios.html (sección #servicios)
+
+#### 4. Equipo 25 Personas (DE: index_v7.html O index-perplexity.html)
+- ✅ Flip cards (8-10 columnas desktop, 6 tablet, 3-4 mobile)
+- ✅ 25 miembros con foto + rol + descripción
+- ✅ Efecto hover 3D
+- **Archivo ref:** index_v7.html o index-perplexity.html
+
+### Estructura Final Requerida:
+
+```
+index-v8.html
+  ├── Navbar (Logo GL Strategic, navegación)
+  ├── Hero (McKinsey style, video fondo)
+  ├── Nuestro ADN + Gráfica PIB
+  ├── Nuestros Servicios (Flip cards 3D)
+  ├── Nuestro Equipo (25 personas)
+  ├── Nuestros Clientes (Accordion por sector)
+  ├── Contacto (Formulario)
+  └── Footer
+```
+
+### Colores Correctos (SIN AZUL MARINO):
+- **Primary:** Blanco #ffffff (Navbar)
+- **Secondary:** Azul claro/Celeste #00a8e8 (Botones, acentos)
+- **Text:** #333333
+- **Fondos:** #f5f7fa
+
+### Próximos Pasos:
+
+1. ⚠️ **Crear index-v8.html** - Combinar los 4 archivos
+2. ⚠️ **Validar responsive** - Desktop/Tablet/Mobile
+3. ⚠️ **Subir a GitHub** - Commit con mensaje claro
+4. ⚠️ **Publicar en GitHub Pages** - Test en live URL
+
+### Archivos Referencia Disponibles:
+- index-verde-clientes.html
+- index-pib-2.html  
+- index-perplexity.html
+- index-detalle-servicios.html
+- index_v7.html (versión actual funcional)
+
+---
+**Última actualización:** 19 dic 2025, 23:00 hrs
