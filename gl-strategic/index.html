@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GL Strategic | Engineering & Management</title>
     <link rel="stylesheet" href="styles.css">
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+	/* Team Flip Cards Styles */
+	.team-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 20px; margin-bottom: 50px; }
+	.flip-card { background-color: transparent; height: 300px; perspective: 1000px; cursor: pointer; border-radius: 10px; }
+	.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+	.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+	.flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; }
+	.flip-card-front { background-color: white; color: #333; }
+	.flip-card-back { background: linear-gradient(135deg, #1a3a8f 0%, #2a5bd7 100%); color: white; transform: rotateY(180deg); }
+	.socio .flip-card-front { background: linear-gradient(135deg, #f9f9f9 0%, #e6e9ff 100%); border-top: 5px solid #ff6b6b; }
+	.consultor .flip-card-front { background: linear-gradient(135deg, #f9f9f9 0%, #e6f7ff 100%); border-top: 5px solid #4ecdc4; }
+	.otro .flip-card-front { background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%); border-top: 5px solid #ffd166; }
+	.member-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+	.socio .member-photo { border-color: #ff6b6b; }
+	.consultor .member-photo { border-color: #4ecdc4; }
+	.otro .member-photo { border-color: #ffd166; }
+	.member-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+	.member-role { font-size: 1rem; color: #666; margin-bottom: 5px; font-weight: 600; }
+	.member-desc { font-size: 0.95rem; line-height: 1.5; margin-top: 10px; opacity: 0.9; }
+	.role-section { margin-bottom: 40px; }
+	.role-title { font-size: 1.8rem; color: #1a3a8f; border-bottom: 3px solid #2a5bd7; padding-bottom: 10px; margin-bottom: 25px; display: inline-block; }
+	@media (max-width: 1200px) { .team-grid { grid-template-columns: repeat(8, 1fr); } }
+	@media (max-width: 992px) { .team-grid { grid-template-columns: repeat(6, 1fr); } .flip-card { height: 280px; } }
+	@media (max-width: 768px) { .team-grid { grid-template-columns: repeat(4, 1fr); } .flip-card { height: 260px; } }
+	@media (max-width: 576px) { .team-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; } .flip-card { height: 240px; } .member-photo { width: 80px; height: 80px; } }
+	@media (max-width: 400px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+	</style>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -113,16 +141,28 @@
         </div>
     </section>
 
-    <!-- EQUIPO SECTION -->
-    <section id="equipo" class="equipo-section">
-        <h2>Nuestro Equipo</h2>
-        <p style="text-align: center; margin-bottom: 2rem;">25 profesionales de excelencia comprometidos con su éxito</p>
-        <div class="team-grid" id="team-container">
-            <!-- Los flip cards de equipo se cargarán con JavaScript -->
-            <style>.team-card{width:120px;height:140px;perspective:1000px;cursor:pointer}.team-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}.team-card:hover .team-card-inner{transform:rotateY(180deg)}.team-card-front,.team-card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #00a8e8;border-radius:8px;padding:10px;text-align:center}.team-card-front{background:#f5f7fa;background-image:url('https://via.placeholder.com/120/00a8e8/ffffff');background-size:cover}.team-card-back{background:#00a8e8;color:#fff;transform:rotateY(180deg)}.team-card-back h4{margin:0;font-size:11px}.team-card-back p{margin:0;font-size:9px}</style><script>const team=[{n:'Gaston L Huillier T',r:'Socio Principal'},{n:'Rafael Sotil Bidart',r:'Socio'},{n:'Guillermo Munoz',r:'Socio'},{n:'Carlos Vergara',r:'Socio'},{n:'Edith Wilson',r:'Socia Legal'},{n:'Juan Manuel',r:'Socio Alianza'},{n:'Claudio Hohmann',r:'Socio'},{n:'Gaston L Huillier',r:'Consultor'},{n:'Maurice Filippi',r:'Consultor'},{n:'Pablo Vega',r:'Consultor'},{n:'Gilberto Cespedes',r:'Senior'},{n:'Jose Ignacio',r:'Senior'},{n:'Juan Ramon',r:'Senior'},{n:'Rodrigo Villena',r:'Senior'},{n:'Jose Rojas',r:'Senior'},{n:'Sergio Martinez',r:'Senior'},{n:'Cristian Duran',r:'Senior'},{n:'Angelo Cerda',r:'Consultor'},{n:'Maria Loreto',r:'Consultora'},{n:'Mario Boada',r:'Comms'},{n:'Nicole L Huillier',r:'Asociada'},{n:'Paula Castro',r:'Asociada'},{n:'Tomas L Huillier',r:'Asociado'},{n:'Marcelo Russo',r:'Asociado'},{n:'Elena Pailamilla',r:'Consultora'}];const c=document.getElementById('team-container');team.forEach(m=>{const d=document.createElement('div');d.className='team-card';d.innerHTML=`<div class="team-card-inner"><div class="team-card-front"></div><div class="team-card-back"><h4>${m.n}</h4><p>${m.r}</p></div></div>`;c.appendChild(d)});</script>
-        </div>
-    </section>
-
+<!-- EQUIPO SECTION -->
+		<section id="equipo" class="equipo-section">
+			<div class="container">
+				<h2 class="section-title">Nuestro Equipo</h2>
+				<p class="section-subtitle">25 profesionales de excelencia comprometidos con su éxito</p>
+				
+				<div class="role-section">
+					<h3 class="role-title">SOCIOS (7)</h3>
+					<div class="team-grid" id="socios-container"></div>
+				</div>
+				
+				<div class="role-section">
+					<h3 class="role-title">CONSULTORES (14)</h3>
+					<div class="team-grid" id="consultores-container"></div>
+				</div>
+				
+				<div class="role-section">
+					<h3 class="role-title">OTROS (4)</h3>
+					<div class="team-grid" id="otros-container"></div>
+				</div>
+			</div>
+		</section>
     <!-- CONTACTO SECTION -->
     <section id="contacto" class="contacto-section">
         <h2>Contacto</h2>
@@ -204,5 +244,83 @@
     </footer>
 
     <script src="script.js"></script>
+                                    	<script>
+	const teamMembers = [
+		{id: 1, name: "Gastón L'Huillier T.", role: "Socio Principal", category: "socio", desc: "Experto en estrategias de ingeniería con más de 20 años de experiencia."},
+		{id: 2, name: "Rafael Sotil Bidart", role: "Socio", category: "socio", desc: "Especialista en planificación estratégica y desarrollo organizacional."},
+		{id: 3, name: "Guillermo Muñoz H.", role: "Socio", category: "socio", desc: "Liderazgo en proyectos de infraestructura."},
+		{id: 4, name: "Carlos Vergara Del Río", role: "Socio", category: "socio", desc: "Experto en transformación digital."},
+		{id: 5, name: "Edith Wilson Porter", role: "Socia Legal", category: "socio", desc: "Especialista en derecho corporativo."},
+		{id: 6, name: "Juan Manuel Fernández", role: "Socio Alianza", category: "socio", desc: "Gestión de alianzas estratégicas."},
+		{id: 7, name: "Claudio Hohmann", role: "Socio Alianza", category: "socio", desc: "Experiencia en joint ventures."},
+		{id: 8, name: "Gastón L'Huillier Ch.", role: "Consultor Asociado", category: "consultor", desc: "Especialista en análisis de datos."},
+		{id: 9, name: "Maurice Filippi R.", role: "Consultor Asociado", category: "consultor", desc: "Experto en gestión de riesgos."},
+		{id: 10, name: "Pablo Vega Buccicardi", role: "Consultor Asociado", category: "consultor", desc: "Especialista en planificación financiera."},
+		{id: 11, name: "Gilberto Céspedes G.", role: "Consultor Senior", category: "consultor", desc: "Más de 15 años en consultoría operacional."},
+		{id: 12, name: "José Ignacio Martínez", role: "Consultor Senior", category: "consultor", desc: "Experto en gestión de cadena de suministro."},
+		{id: 13, name: "Juan Ramón Samaniego", role: "Consultor Senior", category: "consultor", desc: "Especialista en transformación organizacional."},
+		{id: 14, name: "Rodrigo Villena Nieto", role: "Consultor Senior", category: "consultor", desc: "Experto en proyectos de ingeniería."},
+		{id: 15, name: "José Rojas Ubilla", role: "Consultor Senior", category: "consultor", desc: "Especialista en eficiencia energética."},
+		{id: 16, name: "Sergio Martínez", role: "Consultor Senior", category: "consultor", desc: "Experto en sistemas de gestión de calidad."},
+		{id: 17, name: "Cristián Durán Egle", role: "Consultor Senior", category: "consultor", desc: "Especialista en gestión de proyectos tecnológicos."},
+		{id: 18, name: "Angelo Cerda R.", role: "Consultor Asociado", category: "consultor", desc: "Experto en marketing estratégico."},
+		{id: 19, name: "María Loreto Leiva", role: "Consultora Asociada", category: "consultor", desc: "Especialista en recursos humanos."},
+		{id: 20, name: "Mario Boada", role: "Consultor Comms", category: "consultor", desc: "Experto en comunicación corporativa."},
+		{id: 21, name: "Nicole L'Huillier C.", role: "Consultora Asociada", category: "consultor", desc: "Especialista en análisis de mercado."},
+		{id: 22, name: "Paula Castro", role: "Consultora Asociada", category: "otro", desc: "Experta en gestión de proyectos sociales."},
+		{id: 23, name: "Tomás L'Huillier", role: "Consultor Asociado", category: "otro", desc: "Especialista en análisis de datos."},
+		{id: 24, name: "Marcelo Russo", role: "Consultor Asociado", category: "otro", desc: "Experto en consultoría de procesos."},
+		{id: 25, name: "Elena Pailamilla S.", role: "Consultora", category: "otro", desc: "Especialista en capacitación y desarrollo."}
+	];
+	
+	function getPlaceholderImage(id, name, category) {
+		const initials = name.split(' ').map(n => n[0]).join('');
+		const color = category === 'socio' ? 'ff6b6b' : category === 'consultor' ? '4ecdc4' : 'ffd166';
+		return `https://placehold.co/200x200/${color}/ffffff?text=${initials}`;
+	}
+	
+	function createFlipCard(member) {
+		const flipCard = document.createElement('div');
+		flipCard.className = `flip-card ${member.category}`;
+		flipCard.innerHTML = `
+			<div class="flip-card-inner">
+				<div class="flip-card-front">
+					<img src="${getPlaceholderImage(member.id, member.name, member.category)}" alt="${member.name}" class="member-photo">
+					<h4 class="member-name">${member.name}</h4>
+					<p class="member-role">${member.role}</p>
+				</div>
+				<div class="flip-card-back">
+					<h4 class="member-name">${member.name}</h4>
+					<p class="member-role">${member.role}</p>
+					<p class="member-desc">${member.desc}</p>
+				</div>
+			</div>
+		`;
+		return flipCard;
+	}
+	
+	function populateTeam() {
+		const sociosContainer = document.getElementById('socios-container');
+		const consultoresContainer = document.getElementById('consultores-container');
+		const otrosContainer = document.getElementById('otros-container');
+		
+		teamMembers.forEach(member => {
+			const card = createFlipCard(member);
+			switch(member.category) {
+				case 'socio':
+					sociosContainer.appendChild(card);
+					break;
+				case 'consultor':
+					consultoresContainer.appendChild(card);
+					break;
+				case 'otro':
+					otrosContainer.appendChild(card);
+					break;
+			}
+		});
+	}
+	
+	document.addEventListener('DOMContentLoaded', populateTeam);
+	</script>
 </body>
 </html>
